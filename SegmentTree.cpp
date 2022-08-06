@@ -34,3 +34,14 @@ void update(ll index, ll l, ll r, ll pos, ll val) {
     update(2 * index + 1, mid + 1, r, pos, val);
     t[index] = t[2 * index] + t[2 * index + 1];
 }
+
+ll query(ll index, ll l, ll r, ll lq, ll rq) {
+    if(l > rq || lq > r) {
+        return 0;
+    }
+    if(lq <= l && r <= rq) {
+        return t[index];
+    }
+    ll mid = (l + r) / 2;
+    return query(2 * index, l, mid, lq, rq) + query(2 * index + 1, mid + 1, r, lq, rq);
+}
